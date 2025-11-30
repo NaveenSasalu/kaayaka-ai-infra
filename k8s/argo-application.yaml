@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kaayaka-ai
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/YOUR_ORG/kaayaka-ai-infra.git'   # <-- replace
+    targetRevision: HEAD
+    path: '.'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: ai
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

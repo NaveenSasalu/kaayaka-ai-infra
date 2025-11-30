@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemini-backend
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gemini-backend
+  template:
+    metadata:
+      labels:
+        app: gemini-backend
+    spec:
+      containers:
+        - name: backend
+          image: docker.io/naveensasalu/ai-kaayaka-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gemini-secret
+                  key: GEMINI_API_KEY
+            - name: REDIS_URL
+              value: "redis://redis:6379"
+            - name: SYSTEM_INSTRUCTION
+              valueFrom:
+                configMapKeyRef:
+                  name: gemini-config
+                  key: SYSTEM_INSTRUCTION
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gemini-backend
+  namespace: ai
+spec:
+  selector:
+    app: gemini-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP

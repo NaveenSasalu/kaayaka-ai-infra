@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gemini-config
+  namespace: ai
+data:
+  SYSTEM_INSTRUCTION: |
+    You are a professional and concise AI assistant.
+    Provide accurate, clear, structured responses.
+    Avoid unnecessary words.
+    If information is uncertain, ask for clarification instead of guessing.
+    Maintain a respectful, formal tone.
+  REDIS_KEY_PREFIX: "chat_history:"

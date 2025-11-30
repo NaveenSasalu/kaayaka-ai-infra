@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemini-frontend
+  namespace: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gemini-frontend
+  template:
+    metadata:
+      labels:
+        app: gemini-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: docker.io/naveensasalu/ai-kaayaka-frontend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_BACKEND_URL
+              value: "https://ai.kaayaka.in/api"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gemini-frontend
+  namespace: ai
+spec:
+  selector:
+    app: gemini-frontend
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
