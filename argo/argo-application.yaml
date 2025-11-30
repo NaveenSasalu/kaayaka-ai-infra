@@ -6,11 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/YOUR_ORG/kaayaka-ai-infra.git'   # <-- replace
+    repoURL: "https://github.com/NaveenSasalu/kaayaka-ai-infra.git" # <-- replace
     targetRevision: HEAD
-    path: '.'
+    path: "."
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
     namespace: ai
   syncPolicy:
     automated:
