@@ -24,7 +24,7 @@ spec:
     - host: ai.kaayaka.in
       http:
         paths:
-          - path: /api(/|$)(.*) (/|$)(.*)
+          - path: /api(/|$)(.*)
             pathType: ImplementationSpecific
             #            pathType: Prefix
             backend:
