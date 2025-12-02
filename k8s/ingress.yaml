@@ -23,20 +23,14 @@ spec:
     - host: ai.kaayaka.in
       http:
         paths:
-          - path: /api
-            pathType: Prefix
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: gemini-backend
                 port:
                   number: 8000
-          - path: /api/chat-stream
-            pathType: Prefix
-            backend:
-              service:
-                name: gemini-backend
-                port:
-                  number: 8000
+            pathRewrite: "/$2"
 
           - path: /_next
             pathType: Prefix
