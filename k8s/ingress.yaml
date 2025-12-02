@@ -39,3 +39,10 @@ spec:
                 name: gemini-frontend
                 port:
                   number: 80
+          - path: /_next
+            pathType: Prefix
+            backend:
+              service:
+                name: gemini-frontend
+                port:
+                  number: 80
