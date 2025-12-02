@@ -46,3 +46,11 @@ spec:
                 name: gemini-frontend
                 port:
                   number: 80
+
+          - path: /static
+            pathType: Prefix
+            backend:
+              service:
+                name: gemini-frontend
+                port:
+                  number: 80
