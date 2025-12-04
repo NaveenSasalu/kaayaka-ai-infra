@@ -20,4 +20,4 @@ spec:
               service:
                 name: gemini-backend
                 port:
-                  number: 80
+                  number: 8000
