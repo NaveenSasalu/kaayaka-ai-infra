@@ -1,0 +1,4 @@
+resources:
+  - argo
+  - k8s
+  - infrastructure/nginx-streaming
