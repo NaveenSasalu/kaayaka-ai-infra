@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: "https://github.com/NaveenSasalu/kaayaka-ai-infra.git" # <-- replace
+    repoURL: "https://github.com/NaveenSasalu/kaayaka-ai-infra.git"
     targetRevision: HEAD
-    path: "k8s"
+    path: "gops"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: ai
