@@ -20,6 +20,8 @@ spec:
         controller.replicaCount: 1
 
         controller.admissionWebhooks.enabled: false
+        admissionWebhooks:
+          enabled: false
 
         controller.config.enable-http2: "false"
         controller.config.proxy-http-version: "1.1"
