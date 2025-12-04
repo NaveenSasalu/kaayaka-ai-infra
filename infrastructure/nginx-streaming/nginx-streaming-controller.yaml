@@ -5,9 +5,6 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  syncPolicy:
-    automated:
-      selfHeal: true
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
@@ -15,20 +12,25 @@ spec:
     helm:
       values: |
         controller.ingressClass: nginx-streaming
-        controller.ingressClassResource.name: nginx-streaming
-        controller.ingressClassResource.controllerValue: "k8s.io/nginx-streaming"
+        controller.ingressClassResource:
+          name: nginx-streaming
+          controllerValue: "k8s.io/nginx-streaming"
         controller.replicaCount: 1
 
+        # CRITICAL: disable admission webhook and related certgen
         controller.admissionWebhooks.enabled: false
         admissionWebhooks:
           enabled: false
 
-        controller.config.enable-http2: "false"
+        controller.config.enable-http2: "false"      # ensure upstream uses HTTP/1.1 for streaming
         controller.config.proxy-http-version: "1.1"
         controller.config.use-forwarded-headers: "true"
 
         defaultBackend.enabled: false
-
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx-streaming
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
