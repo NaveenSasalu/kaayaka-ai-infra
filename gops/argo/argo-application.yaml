@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/NaveenSasalu/kaayaka-ai-infra.git"
-    targetRevision: HEAD
+    targetRevision: main
     path: gops
   destination:
     server: "https://kubernetes.default.svc"
