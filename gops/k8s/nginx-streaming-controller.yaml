@@ -26,6 +26,9 @@ spec:
         controller.config.proxy-http-version: "1.1"
         controller.config.use-forwarded-headers: "true"
 
+        controller.service:
+          type: ClusterIP    # <---- CRITICAL FIX to over come default using LB
+
         defaultBackend.enabled: false
   destination:
     server: https://kubernetes.default.svc
