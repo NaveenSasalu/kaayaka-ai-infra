@@ -27,6 +27,7 @@ spec:
         controller.config.use-forwarded-headers: "true"
 
         controller.service:
+          enabled: true
           type: ClusterIP    # <---- CRITICAL FIX to over come default using LB
 
         defaultBackend.enabled: false
