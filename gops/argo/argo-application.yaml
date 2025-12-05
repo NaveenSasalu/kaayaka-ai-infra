@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: "https://github.com/NaveenSasalu/kaayaka-ai-infra.git"
     targetRevision: main
-    path: k8s
+    path: gops/k8s
   destination:
     server: "https://kubernetes.default.svc"
     namespace: ai
